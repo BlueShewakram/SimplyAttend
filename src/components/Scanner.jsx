@@ -165,7 +165,12 @@ export default function Scanner() {
         }, 500);
         return;
       }
-      setError(msg);
+      // Detect "camera in use" errors and give a friendlier message
+      if (msg.toLowerCase().includes('in use') || msg.toLowerCase().includes('already') || msg.toLowerCase().includes('notreadable') || msg.includes('TrackStartError') || msg.includes('AbortError')) {
+        setError('Camera is in use by another tab. Close the other tab or switch to it first.');
+      } else {
+        setError(msg);
+      }
       setIsScanning(false);
     } finally {
       transitionLock.current = false;
@@ -194,6 +199,40 @@ export default function Scanner() {
       }
     };
   }, []);
+
+  // ── Page Visibility: release camera when tab is hidden, re-acquire when visible ──
+  useEffect(() => {
+    const wasScanningRef = { current: false };
+
+    const handleVisibilityChange = async () => {
+      if (document.hidden) {
+        // Tab is now hidden — release the camera so other tabs can use it
+        if (isScanning || html5QrRef.current) {
+          wasScanningRef.current = true;
+          try {
+            if (html5QrRef.current) {
+              await html5QrRef.current.stop();
+            }
+          } catch (_) { }
+          setIsScanning(false);
+          transitionLock.current = false;
+        }
+      } else {
+        // Tab is now visible again — re-acquire the camera
+        if (wasScanningRef.current) {
+          wasScanningRef.current = false;
+          // Small delay to let the other tab release the camera
+          setTimeout(() => {
+            transitionLock.current = false;
+            startScanning();
+          }, 600);
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [isScanning, startScanning]);
 
   // Auto-start on first mount only
   useEffect(() => {

@@ -87,7 +87,7 @@ export default function Scanner() {
       await html5QrRef.current.start(
         { facingMode: 'environment' },
         {
-          fps: 25,
+          fps: 15,
           disableFlip: false,
           qrbox: { width: 250, height: 250 }
         },

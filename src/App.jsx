@@ -25,56 +25,56 @@ function App() {
         <div className="absolute top-[20%] left-[60%] w-[30%] h-[40%] bg-fuchsia-500/10 blur-[100px] rounded-full mix-blend-screen animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-8">
+      <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* ── Header ── */}
-        <header className="flex items-center justify-between mb-8 backdrop-blur-xl bg-black/20 border border-white/5 p-4 rounded-3xl shadow-2xl">
+        <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 sm:mb-8 backdrop-blur-xl bg-black/20 border border-white/5 p-3 sm:p-4 rounded-2xl sm:rounded-3xl shadow-2xl gap-3 sm:gap-0">
           {/* Logo + time */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-between w-full sm:w-auto gap-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-gradient-to-br from-cyan-400 to-violet-600 rounded-2xl shadow-lg shadow-violet-500/20 ring-1 ring-white/20">
-                <Sparkles className="text-white" size={22} />
+              <div className="p-2 sm:p-2.5 bg-gradient-to-br from-cyan-400 to-violet-600 rounded-xl sm:rounded-2xl shadow-lg shadow-violet-500/20 ring-1 ring-white/20">
+                <Sparkles className="text-white" size={18} />
               </div>
               <div className="flex flex-col">
-                <h1 className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-zinc-400">SimplyAttend</h1>
-                <p className="text-cyan-400 text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 mt-0.5">
-                  <Wifi size={10} className="animate-pulse" /> Live Sync Active
+                <h1 className="text-xl sm:text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-zinc-400">SimplyAttend</h1>
+                <p className="text-cyan-400 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest flex items-center gap-1 mt-0.5">
+                  <Wifi size={9} className="animate-pulse" /> Live Sync Active
                 </p>
               </div>
             </div>
 
-            {/* Live date/time pill */}
-            <div className="hidden sm:flex items-center gap-2 bg-black/30 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl shadow-inner">
-              <Clock size={14} className="text-cyan-400 animate-pulse-slow" />
-              <span className="text-zinc-300 text-xs font-semibold">{dateStr}</span>
-              <span className="text-zinc-600">·</span>
-              <span className="text-cyan-400 text-xs font-bold font-mono tracking-wider">{timeStr}</span>
+            {/* Live date/time pill — visible on mobile too but compact */}
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-black/30 backdrop-blur-md border border-white/10 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl shadow-inner">
+              <Clock size={12} className="text-cyan-400 animate-pulse-slow" />
+              <span className="hidden sm:inline text-zinc-300 text-xs font-semibold">{dateStr}</span>
+              <span className="hidden sm:inline text-zinc-600">·</span>
+              <span className="text-cyan-400 text-[10px] sm:text-xs font-bold font-mono tracking-wider">{timeStr}</span>
             </div>
           </div>
 
           {/* Nav */}
-          <div className="flex items-center gap-2">
-            <div className="flex bg-black/30 backdrop-blur-md border border-white/10 p-1.5 rounded-2xl gap-2 shadow-inner">
+          <div className="flex items-center w-full sm:w-auto">
+            <div className="flex bg-black/30 backdrop-blur-md border border-white/10 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl gap-1 sm:gap-2 shadow-inner w-full sm:w-auto">
               <button
                 onClick={() => setActiveTab('scanner')}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                className={`flex items-center justify-center gap-1.5 sm:gap-2 flex-1 sm:flex-none px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 ${
                   activeTab === 'scanner'
                     ? 'bg-gradient-to-r from-cyan-500/20 to-violet-500/20 text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.15)] ring-1 ring-cyan-400/30'
                     : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <Camera size={16} className={activeTab === 'scanner' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]' : 'text-zinc-500'} />
-                Scanner
+                <Camera size={15} className={activeTab === 'scanner' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]' : 'text-zinc-500'} />
+                <span>Scanner</span>
               </button>
               <button
                 onClick={() => setActiveTab('dashboard')}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                className={`flex items-center justify-center gap-1.5 sm:gap-2 flex-1 sm:flex-none px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 ${
                   activeTab === 'dashboard'
                     ? 'bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.15)] ring-1 ring-violet-400/30'
                     : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <LayoutDashboard size={16} className={activeTab === 'dashboard' ? 'text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.8)]' : 'text-zinc-500'} />
-                Dashboard
+                <LayoutDashboard size={15} className={activeTab === 'dashboard' ? 'text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.8)]' : 'text-zinc-500'} />
+                <span>Dashboard</span>
               </button>
             </div>
           </div>
@@ -95,7 +95,7 @@ function App() {
         </main>
 
         {/* ── Footer ── */}
-        <footer className="mt-12 text-center text-[10px] uppercase tracking-widest font-bold">
+        <footer className="mt-10 sm:mt-12 text-center text-[10px] uppercase tracking-widest font-bold">
           <span className="text-zinc-600">SimplyAttend v1.0 — Built by </span>
           <span className="text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">Shewakram</span>
         </footer>

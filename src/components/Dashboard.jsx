@@ -145,52 +145,53 @@ export default function Dashboard() {
     <div className="space-y-4 animate-fade-in">
 
       {/* ── Stat Cards ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {statCards.map(({ icon: Icon, label, value, color, bg }) => (
-          <div key={label} className="backdrop-blur-xl bg-[#06110b]/60 border border-white/5 rounded-3xl p-6 shadow-2xl hover:border-white/10 hover:bg-[#06110b]/80 transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden">
+          <div key={label} className="backdrop-blur-xl bg-[#06110b]/60 border border-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl hover:border-white/10 hover:bg-[#06110b]/80 transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden">
             <div className={`absolute top-0 right-0 w-24 h-24 bg-${bg}-500/10 blur-[40px] rounded-full group-hover:bg-${bg}-500/20 transition-all pointer-events-none`}></div>
-            <div className="flex items-center justify-between mb-4">
-              <div className={`w-12 h-12 rounded-2xl bg-${bg}-500/10 flex items-center justify-center group-hover:bg-${bg}-500/20 group-hover:scale-105 transition-all duration-300 ring-1 ring-${bg}-500/20 shadow-inner shadow-${bg}-500/10`}>
-                <Icon size={20} className={`text-${color}-400 drop-shadow-md`} />
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-${bg}-500/10 flex items-center justify-center group-hover:bg-${bg}-500/20 group-hover:scale-105 transition-all duration-300 ring-1 ring-${bg}-500/20 shadow-inner shadow-${bg}-500/10`}>
+                <Icon size={16} className={`text-${color}-400 drop-shadow-md`} />
               </div>
               {label === 'Total Records' && stats.todayCount > 0 && (
-                <span className="text-[10px] bg-gradient-to-r from-cyan-500/20 to-violet-500/20 text-cyan-300 border border-cyan-500/30 px-2.5 py-1 rounded-full font-bold uppercase tracking-wider backdrop-blur-md shadow-sm">
-                  +{stats.todayCount} today
+                <span className="text-[9px] sm:text-[10px] bg-gradient-to-r from-cyan-500/20 to-violet-500/20 text-cyan-300 border border-cyan-500/30 px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-bold uppercase tracking-wider backdrop-blur-md shadow-sm">
+                  +{stats.todayCount}
                 </span>
               )}
             </div>
-            <p className={`text-${color}-400 font-black text-4xl leading-tight tracking-tight`}>{value}</p>
-            <p className="text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1.5">{label}</p>
+            <p className={`text-${color}-400 font-black text-2xl sm:text-4xl leading-tight tracking-tight`}>{value}</p>
+            <p className="text-zinc-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mt-1 sm:mt-1.5">{label}</p>
           </div>
         ))}
       </div>
 
       {/* ── Main Table ── */}
-      <div className="backdrop-blur-xl bg-[#06110b]/60 border border-white/5 rounded-3xl overflow-hidden shadow-2xl relative">
+      <div className="backdrop-blur-xl bg-[#06110b]/60 border border-white/5 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl relative">
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent"></div>
         {/* Table Header */}
-        <div className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/5">
-          <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2.5">
-              <div className="p-2 bg-cyan-500/10 rounded-xl ring-1 ring-cyan-500/20 shadow-inner">
-                <Users className="text-cyan-400" size={18} />
+        <div className="p-4 sm:p-6 flex flex-col gap-3 border-b border-white/5">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base sm:text-xl font-bold text-white flex items-center gap-2">
+              <div className="p-1.5 sm:p-2 bg-cyan-500/10 rounded-lg sm:rounded-xl ring-1 ring-cyan-500/20 shadow-inner">
+                <Users className="text-cyan-400" size={16} />
               </div>
               Attendance Records
             </h2>
-            <p className="text-zinc-500 mt-1.5 text-xs font-semibold tracking-wide">
-              {filteredLogs.length} RECORD{filteredLogs.length !== 1 ? 'S' : ''} FOUND
+            <p className="text-zinc-500 text-[10px] sm:text-xs font-semibold tracking-wide">
+              {filteredLogs.length} REC{filteredLogs.length !== 1 ? 'S' : ''}
             </p>
           </div>
+          {/* Controls row — wraps naturally on mobile */}
           <div className="flex flex-wrap items-center gap-2">
-            {/* Search */}
-            <div className="relative group">
-              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-cyan-400 transition-colors" />
+            {/* Search — full width on xs */}
+            <div className="relative group flex-1 min-w-[140px]">
+              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-cyan-400 transition-colors" />
               <input
                 type="text"
                 placeholder="Search student..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2.5 bg-black/40 border border-white/5 rounded-xl text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 w-52 transition-all shadow-inner"
+                className="pl-9 pr-3 py-2 bg-black/40 border border-white/5 rounded-xl text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 w-full transition-all shadow-inner"
               />
             </div>
 
@@ -198,7 +199,7 @@ export default function Dashboard() {
             <select
               value={dateFilter}
               onChange={(e) => setDateFilter(e.target.value)}
-              className="px-4 py-2.5 bg-black/40 border border-white/5 rounded-xl text-sm text-zinc-300 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all cursor-pointer appearance-none shadow-inner"
+              className="px-3 py-2 bg-black/40 border border-white/5 rounded-xl text-xs sm:text-sm text-zinc-300 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all cursor-pointer appearance-none shadow-inner"
             >
               <option value="all">All Time</option>
               <option value="today">Today</option>
@@ -219,16 +220,16 @@ export default function Dashboard() {
             <button
               onClick={handleExport}
               disabled={filteredLogs.length === 0}
-              className="flex items-center gap-1.5 px-4 py-2.5 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 hover:border-cyan-500/30 text-cyan-400 text-xs font-bold tracking-wide rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_10px_rgba(34,211,238,0.05)] hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]"
+              className="flex items-center gap-1.5 px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 hover:border-cyan-500/30 text-cyan-400 text-xs font-bold tracking-wide rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_10px_rgba(34,211,238,0.05)] hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]"
             >
               <Download size={13} />
-              Export
+              <span className="hidden sm:inline">Export</span>
             </button>
 
             {/* Refresh */}
             <button
               onClick={fetchLogs}
-              className="px-4 py-2.5 bg-black/40 border border-white/5 hover:bg-white/5 text-zinc-400 hover:text-white rounded-xl transition-all text-xs font-bold tracking-wide shadow-inner"
+              className="px-3 py-2 bg-black/40 border border-white/5 hover:bg-white/5 text-zinc-400 hover:text-white rounded-xl transition-all text-xs font-bold tracking-wide shadow-inner"
             >
               Refresh
             </button>
@@ -263,15 +264,15 @@ export default function Dashboard() {
               </p>
             </div>
           ) : (
-            <div className="overflow-auto max-h-[500px] fancy-scrollbar">
-              <table className="w-full text-left border-collapse">
+            <div className="overflow-x-auto max-h-[500px]">
+              <table className="w-full text-left border-collapse min-w-[500px]">
                 <thead className="sticky top-0 bg-[#040b07]/80 backdrop-blur-xl z-10 border-b border-white/5 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
                   <tr>
-                    <th className="px-6 py-4">#</th>
-                    <th className="px-6 py-4">Student Name</th>
-                    <th className="px-6 py-4">Date</th>
-                    <th className="px-6 py-4">Check-in Time</th>
-                    <th className="px-6 py-4 text-right">Status</th>
+                    <th className="px-3 sm:px-6 py-3 sm:py-4">#</th>
+                    <th className="px-3 sm:px-6 py-3 sm:py-4">Student</th>
+                    <th className="px-3 sm:px-6 py-3 sm:py-4 hidden sm:table-cell">Date</th>
+                    <th className="px-3 sm:px-6 py-3 sm:py-4">Time</th>
+                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-right">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
@@ -279,27 +280,27 @@ export default function Dashboard() {
                     const status = getStatusFromTime(log.created_at);
                     return (
                       <tr key={log.id} className="hover:bg-white/[0.02] transition-colors group">
-                        <td className="px-6 py-4 whitespace-nowrap text-zinc-600 text-xs font-mono font-medium">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-zinc-600 text-xs font-mono font-medium">
                           {sortOrder === 'desc' ? idx + 1 : filteredLogs.length - idx}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center gap-3.5">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500/10 to-violet-500/5 flex items-center justify-center group-hover:from-cyan-500/20 group-hover:to-violet-500/10 transition-all flex-shrink-0 ring-1 ring-cyan-500/20 shadow-inner">
-                              <span className="text-cyan-400 text-xs font-black shadow-sm">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4">
+                          <div className="flex items-center gap-2 sm:gap-3.5">
+                            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br from-cyan-500/10 to-violet-500/5 flex items-center justify-center group-hover:from-cyan-500/20 group-hover:to-violet-500/10 transition-all flex-shrink-0 ring-1 ring-cyan-500/20 shadow-inner">
+                              <span className="text-cyan-400 text-[10px] sm:text-xs font-black shadow-sm">
                                 {(log.student_id || 'U').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                               </span>
                             </div>
-                            <span className="text-zinc-200 font-semibold text-sm tracking-wide">{log.student_id || 'Unknown'}</span>
+                            <span className="text-zinc-200 font-semibold text-xs sm:text-sm tracking-wide max-w-[100px] sm:max-w-none truncate">{log.student_id || 'Unknown'}</span>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-zinc-400 text-xs font-medium">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-zinc-400 text-xs font-medium hidden sm:table-cell">
                           {formatDate(log.created_at)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-zinc-300 text-sm font-mono tracking-tight">
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-zinc-300 text-xs sm:text-sm font-mono tracking-tight">
                           {formatTime(log.created_at)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right">
-                          <span className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase ${
+                        <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-right">
+                          <span className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold tracking-wide uppercase ${
                             status === 'Present'
                               ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
                               : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]'

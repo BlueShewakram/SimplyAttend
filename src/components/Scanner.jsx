@@ -206,34 +206,34 @@ export default function Scanner() {
       <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/5 blur-[60px] rounded-full pointer-events-none transition-all group-hover:bg-cyan-500/10"></div>
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between px-6 py-5 border-b border-white/5 relative z-10">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-cyan-500/10 rounded-xl ring-1 ring-cyan-500/20 shadow-inner">
-            <ScanLine size={18} className="text-cyan-400" />
+      <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-white/5 relative z-10">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="p-1.5 sm:p-2 bg-cyan-500/10 rounded-lg sm:rounded-xl ring-1 ring-cyan-500/20 shadow-inner">
+            <ScanLine size={16} className="text-cyan-400" />
           </div>
-          <span className="font-bold text-white text-base tracking-wide">Student Check-In</span>
+          <span className="font-bold text-white text-sm sm:text-base tracking-wide">Student Check-In</span>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 bg-zinc-800/50 border border-zinc-700/40 px-2.5 py-1 rounded-full">
-            <UserCheck size={12} className="text-cyan-400" />
-            <span className="text-zinc-300 text-xs font-semibold">{todayCount} today</span>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-zinc-800/50 border border-zinc-700/40 px-2 py-1 rounded-full">
+            <UserCheck size={11} className="text-cyan-400" />
+            <span className="text-zinc-300 text-[10px] sm:text-xs font-semibold">{todayCount} today</span>
           </div>
           {isScanning && (
-            <div className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-1 rounded-full">
+            <div className="flex items-center gap-1 sm:gap-1.5 bg-cyan-500/10 border border-cyan-500/30 px-2 py-1 rounded-full">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span className="text-cyan-400 text-xs font-bold tracking-wide">Live</span>
+              <span className="text-cyan-400 text-[10px] sm:text-xs font-bold tracking-wide">Live</span>
             </div>
           )}
         </div>
       </div>
 
       {/* ── Camera viewport ── */}
-      <div className="relative overflow-hidden" style={{ minHeight: 300, background: '#000' }}>
+      <div className="relative overflow-hidden" style={{ minHeight: 260, background: '#000' }}>
         {/* QR Reader — always in DOM */}
-        <div id="qr-reader" style={{ width: '100%', minHeight: 300 }} />
+        <div id="qr-reader" style={{ width: '100%', minHeight: 260 }} />
 
         {/* Corner brackets overlay */}
         {isScanning && (
@@ -316,45 +316,45 @@ export default function Scanner() {
 
       {/* ── Bottom bar ── */}
       {isScanning && (
-        <div className="flex items-center justify-between px-6 py-4 bg-black/40 border-t border-white/5 backdrop-blur-md relative z-10 shadow-inner">
-          <p className="text-zinc-400 text-xs font-medium tracking-wide">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-black/40 border-t border-white/5 backdrop-blur-md relative z-10 shadow-inner">
+          <p className="text-zinc-400 text-[11px] sm:text-xs font-medium tracking-wide">
             Scanning for <span className="text-white font-bold">QR codes</span> — hold steady
           </p>
           <button
             onClick={() => { stopScanning(); setError(null); setScanResult(null); }}
-            className="flex items-center gap-1.5 px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:text-rose-300 text-xs font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(244,63,94,0.1)] hover:shadow-[0_0_20px_rgba(244,63,94,0.2)]"
+            className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:text-rose-300 text-xs font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(244,63,94,0.1)] hover:shadow-[0_0_20px_rgba(244,63,94,0.2)]"
           >
-            <StopCircle size={14} /> Stop
+            <StopCircle size={13} /> Stop
           </button>
         </div>
       )}
 
       {/* ── Recent Check-ins ── */}
-      <div className="px-6 py-5 flex-1 relative z-10 bg-gradient-to-b from-transparent to-black/20">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-4">Recent Check-ins</p>
-        <div className="flex flex-col gap-3">
+      <div className="px-4 sm:px-6 py-4 sm:py-5 flex-1 relative z-10 bg-gradient-to-b from-transparent to-black/20">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-3 sm:mb-4">Recent Check-ins</p>
+        <div className="flex flex-col gap-2 sm:gap-3">
           {recentCheckins.length === 0 ? (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-black/40 rounded-2xl border border-white/5 flex items-center justify-center mx-auto mb-3 shadow-inner">
-                <Clock size={24} className="text-zinc-600" />
+            <div className="text-center py-6 sm:py-8">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-black/40 rounded-2xl border border-white/5 flex items-center justify-center mx-auto mb-3 shadow-inner">
+                <Clock size={22} className="text-zinc-600" />
               </div>
               <p className="text-zinc-400 text-sm font-semibold">No check-ins yet today</p>
             </div>
           ) : (
             recentCheckins.map((c, i) => (
-              <div key={c.id || i} className="flex items-center justify-between bg-black/40 border border-white/5 rounded-2xl px-4 py-3 hover:bg-black/60 transition-colors shadow-inner group">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/10 to-violet-500/5 flex items-center justify-center group-hover:from-cyan-500/20 group-hover:to-violet-500/10 transition-all flex-shrink-0 ring-1 ring-cyan-500/20 shadow-inner">
+              <div key={c.id || i} className="flex items-center justify-between bg-black/40 border border-white/5 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 hover:bg-black/60 transition-colors shadow-inner group">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500/10 to-violet-500/5 flex items-center justify-center group-hover:from-cyan-500/20 group-hover:to-violet-500/10 transition-all flex-shrink-0 ring-1 ring-cyan-500/20 shadow-inner">
                     <span className="text-cyan-400 text-xs font-black shadow-sm">
                       {c.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
                     </span>
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-bold tracking-wide leading-tight group-hover:text-cyan-50 transition-colors">{c.name}</p>
+                  <div className="min-w-0">
+                    <p className="text-white text-xs sm:text-sm font-bold tracking-wide leading-tight group-hover:text-cyan-50 transition-colors truncate max-w-[120px] sm:max-w-none">{c.name}</p>
                     <p className="text-zinc-500 text-[11px] font-medium mt-1 tracking-tight flex items-center gap-1">{c.time}</p>
                   </div>
                 </div>
-                <span className={`px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase ${c.status === 'Present'
+                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex-shrink-0 ml-2 ${c.status === 'Present'
                   ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
                   : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]'
                   }`}>

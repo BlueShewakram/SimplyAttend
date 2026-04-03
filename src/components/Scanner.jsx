@@ -87,13 +87,9 @@ export default function Scanner() {
       await html5QrRef.current.start(
         { facingMode: 'environment' },
         {
-          fps: 60,
+          fps: 15,
           disableFlip: false,
-          qrbox: (viewfinderWidth, viewfinderHeight) => {
-            const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
-            const size = Math.floor(minEdge * 0.85); // 85% of shortest screen edge
-            return { width: size, height: size };
-          }
+          qrbox: { width: 250, height: 250 }
         },
         async (decodedText) => {
           // On successful scan

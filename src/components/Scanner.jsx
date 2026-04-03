@@ -87,7 +87,7 @@ export default function Scanner() {
       await html5QrRef.current.start(
         { facingMode: 'environment' },
         {
-          fps: 15,
+          fps: 25,
           disableFlip: false,
           qrbox: { width: 250, height: 250 }
         },
@@ -259,8 +259,8 @@ export default function Scanner() {
         {scanResult && !error && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 z-20 animate-fade-in">
             <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 ring-2 ring-offset-2 ring-offset-black ${scanResult.status === 'Already Scanned'
-                ? 'bg-amber-500/20 ring-amber-500/30'
-                : 'bg-emerald-500/20 ring-emerald-500/30'
+              ? 'bg-amber-500/20 ring-amber-500/30'
+              : 'bg-emerald-500/20 ring-emerald-500/30'
               }`}>
               {scanResult.status === 'Already Scanned' ? (
                 <AlertCircle className="w-9 h-9 text-amber-400" />
@@ -273,10 +273,10 @@ export default function Scanner() {
               <Clock size={11} /> {scanResult.time}
             </p>
             <span className={`mt-2 px-3 py-0.5 rounded-full text-xs font-semibold ${scanResult.status === 'Present'
-                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                : scanResult.status === 'Already Scanned'
-                  ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                  : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+              : scanResult.status === 'Already Scanned'
+                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
               }`}>
               {scanResult.status}
             </span>
@@ -355,8 +355,8 @@ export default function Scanner() {
                   </div>
                 </div>
                 <span className={`px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase ${c.status === 'Present'
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
-                    : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]'
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
+                  : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.1)]'
                   }`}>
                   {c.status}
                 </span>
